@@ -25,6 +25,7 @@ var GCStatsBanner = function(cfg){
 		_cfgDefault = {
 			callerVersion: 'Unknown',
 			elPrefix: '',
+			imgScript: 'st_F_award.php',
 			logLevel: 'normal',
 			seriesLevels: ['None'],
 			seriesLevelDefault: 'None',
