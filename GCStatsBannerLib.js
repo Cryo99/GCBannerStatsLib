@@ -25,7 +25,7 @@ var GCStatsBanner = function(cfg){
 		_cfgDefault = {
 			callerVersion: 'Unknown',
 			elPrefix: '',
-			imgScript: 'st_F_award.php',
+			imgScript: 'find-badge.php',
 			logLevel: 'normal',
 			seriesLevels: ['None'],
 			seriesLevelDefault: 'None',
@@ -114,7 +114,7 @@ var GCStatsBanner = function(cfg){
     
     function _getHtml(uname, brand){
 		return "<a class='" + _cfg.elPrefix + "-badge' href='https://www." + _cfg.seriesURL + "' title='" + _cfg.seriesName +
-			" stats.'><img src='https://img." + _cfg.seriesURL + "/awards/find-badge.php?name=" + uname + "&brand=" + brand + "' /></a>";
+			" stats.'><img src='https://img." + _cfg.seriesURL + "/awards/" + cfg.imgScript + "?name=" + uname + "&brand=" + brand + "' /></a>";
     };
 
 	function _displayStats(stats, page, brand){
