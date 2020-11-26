@@ -53,11 +53,11 @@ var GCStatsBanner = function(cfg){
 			if(typeof cfg[cfgItem] === 'undefined' || cfg[cfgItem] === null){
 				// Required variable is undefined or null
 				if(_cfgDefault[cfgItem] === false){
-					throw new Error('GCBannerStats: ' + cfgItem + ' is a required configuration element.');
+					throw new Error('GCStatsBannerLib: ' + cfgItem + ' is a required configuration element.');
 				}
 				// Use the default value.
 				_cfg[cfgItem] = _cfgDefault[cfgItem];
-				// console.warn('GCBannerStats: ' + cfgItem + ' undefined. Using value: ' + _cfgDefault[cfgItem] + '.')
+				// console.warn('GCStatsBannerLib: ' + cfgItem + ' undefined. Using value: ' + _cfgDefault[cfgItem] + '.')
 			}else{
 				// Use the configured value. 
 				_cfg[cfgItem] = cfg[cfgItem];
@@ -114,7 +114,7 @@ var GCStatsBanner = function(cfg){
     
     function _getHtml(uname, brand){
 		return "<a class='" + _cfg.elPrefix + "-badge' href='https://www." + _cfg.seriesURL + "' title='" + _cfg.seriesName +
-			" stats.'><img src='https://img." + _cfg.seriesURL + "/awards/" + cfg.imgScript + "?name=" + uname + "&brand=" + brand + "' /></a>";
+			" stats.'><img src='https://img." + _cfg.seriesURL + "/awards/" + _cfg.imgScript + "?name=" + uname + "&brand=" + brand + "' /></a>";
     };
 
 	function _displayStats(stats, page, brand){
