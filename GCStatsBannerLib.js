@@ -66,6 +66,7 @@ var GCStatsBanner = function(cfg){
 		}
 		_log(cfg, 'Passed config')
 		_log(_cfg, 'Generated config')
+_log(_cfg.elPrefix, 'Prefix')
 
 		_generateCSS();
 	}
