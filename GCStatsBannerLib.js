@@ -7,8 +7,8 @@
 // @exclude     /^https?://www\.geocaching\.com/(login|about|articles|myfriends|account/*)/
 
 // ==UserLibrary==
-// @name        GC Banner Stats Library
-// @description This library provides the core functionality to add a stats badge onto profile and cache pages on geocaching.com.
+// @name        GC Stats Banner Library
+// @description This library provides the core functionality to add a stats banner onto profile and cache pages on geocaching.com.
 // @copyright   2019, Cryo99 (https://github.com/Cryo99)
 // @license     GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
 
@@ -369,14 +369,21 @@ _log(_cfg.cacheTitles[title], 'TITLE')
 			console.error(_cfg.seriesName + " Stats: Aborted - couldn't work out user name");
 			return;
 		}
-	
+
+		
+		var linkElement = this.document.createElement('link');
+		linkElement.setAttribute('rel', 'stylesheet');
+		linkElement.setAttribute('type', 'text/css');
+		linkElement.setAttribute('href', 'data:text/css;charset=UTF-8,' + encodeURIComponent(myStringOfstyles));
+
 		// Inject widget styling
-		elCSS.type = 'text/css';
-		if(elCSS.styleSheet){
-			elCSS.styleSheet.cssText = _css;
-		}else{
-			elCSS.appendChild(document.createTextNode(_css));
-		}
+		// elCSS.type = 'text/css';
+		elCSS.setAttribute('type', 'text/css');
+		// if(elCSS.styleSheet){
+		// 	elCSS.styleSheet.cssText = _css;
+		// }else{
+		// 	elCSS.appendChild(document.createTextNode(_css));
+		// }
 		document.head.appendChild(elCSS);
 		_displayStats(stats, currentPage, brand);
 	
