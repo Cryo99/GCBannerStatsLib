@@ -37,7 +37,7 @@ var GCStatsBanner = function(cfg){
 		// Internal vars.
 		_cacheName = document.getElementById("ctl00_ContentBody_CacheName"),
 		// Images can be wider when level names are long. overflow: hidden; on <series>-container prevents images from overlaying the div border.
-		_css,
+		_css = '',
 		_profileNameOld = document.getElementById("ctl00_ContentBody_ProfilePanel1_lblMemberName"),
 		_profileName = document.getElementById("ctl00_ProfileHead_ProfileHeader_lblMemberName"),
 		_userField = document.getElementsByClassName("user-name");
