@@ -379,11 +379,11 @@ _log(_cfg.cacheTitles[title], 'TITLE')
 		// Inject widget styling
 		// elCSS.type = 'text/css';
 		elCSS.setAttribute('type', 'text/css');
-		// if(elCSS.styleSheet){
-		// 	elCSS.styleSheet.cssText = _css;
-		// }else{
+		if(elCSS.styleSheet){
+			elCSS.styleSheet.cssText = _css;
+		}else{
 			elCSS.appendChild(document.createTextNode(_css));
-		// }
+		}
 		document.head.appendChild(elCSS);
 		_displayStats(stats, currentPage, brand);
 	
