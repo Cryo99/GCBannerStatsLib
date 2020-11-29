@@ -379,11 +379,6 @@ _log(_cfg.cacheTitles[title], 'TITLE')
 		}
 
 		
-		var linkElement = this.document.createElement('link');
-		linkElement.setAttribute('rel', 'stylesheet');
-		linkElement.setAttribute('type', 'text/css');
-		linkElement.setAttribute('href', 'data:text/css;charset=UTF-8,' + encodeURIComponent(myStringOfstyles));
-
 		// Inject widget styling
 		// elCSS.type = 'text/css';
 		elCSS.setAttribute('type', 'text/css');
