@@ -62,11 +62,11 @@ var GCStatsBanner = function(cfg){
 		}
 		// If elPrefix is still empty, generate it.
 		if(!_cfg.elPrefix){
-			_cfg.elPrefix = _getPrefix(cfg.seriesName)
+			_cfg.elPrefix = _getPrefix(cfg.seriesName);
 		}
-		_log(cfg, 'Passed config')
-		_log(_cfg, 'Generated config')
-_log(_cfg.elPrefix, 'Prefix')
+		_log(cfg, 'Passed config');
+		_log(_cfg, 'Generated config');
+_log(_cfg.elPrefix, 'Prefix');
 
 		_generateCSS();
 	}
@@ -83,7 +83,7 @@ _log(_cfg.elPrefix, 'Prefix')
 			'.WidgetBody div.' + _cfg.elPrefix + '-container { border: none; } ' +
 			'#ctl00_ContentBody_ProfilePanel1_pnlProfile div.' + _cfg.elPrefix + '-container { border: none; text-align: inherit;} ' +
 			'a.' + _cfg.elPrefix + '-badge { background-color: white;} ' +
-			'#ctl00_ContentBody_ProfilePanel1_pnlProfile div.' + _cfg.elPrefix + '-container {float: left}',
+			'#ctl00_ContentBody_ProfilePanel1_pnlProfile div.' + _cfg.elPrefix + '-container {float: left}';
 	}
 
 	function _log(msg, desc){
