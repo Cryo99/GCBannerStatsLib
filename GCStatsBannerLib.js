@@ -23,6 +23,7 @@ var GCStatsBanner = function(cfg){
     // ========================= Private members =========================
 	var _cfg = {},
 		_cfgDefault = {
+			cacheTitles: false,
 			callerVersion: 'Unknown',
 			elPrefix: '',
 			imgScript: 'find-badge.php',
@@ -298,11 +299,25 @@ var GCStatsBanner = function(cfg){
 		}else{
 			if(_cacheName){
 				// On a Geocache page...
-				var matcher = new RegExp(_cfg.seriesName, "i");
-				if(!matcher.test(_cacheName.innerHTML)){
+				// var matcher = new RegExp(_cfg.seriesName, "i");
+				// if(!matcher.test(_cacheName.innerHTML)){
+					// ...but not the right cache series.
+				// 	return;
+				// }
+
+				var titleFound = false;
+				for(title in _cfg.cacheTitles){
+_log(_cfg.cacheTitles[title], 'TITLE')
+					var matcher = new RegExp(_cfg.cacheTitles[title], "i");
+					if(matcher.test(_cacheName.innerHTML)){
+						titleFound = true;
+					}
+				}
+				if(!titleFound){
 					// ...but not the right cache series.
 					return;
 				}
+
 				currentPage = "cache";
 			}else{
 				currentPage = "profile";
@@ -311,7 +326,8 @@ var GCStatsBanner = function(cfg){
 		_log(currentPage, 'Detected page');
 
 		// We're going to display so we can announce ourselves and prepare the configuration dialogue.
-		// console.info(_seriesName + " Stats V" + GM_info.script.version);
+		console.info("GCStatsBannerLib V" + GM_info.script.version);
+		console.info(_seriesName + " Stats V" + _cfg.callerVersion);
 
 		//CONFIG
 		_createConfigDlg();
