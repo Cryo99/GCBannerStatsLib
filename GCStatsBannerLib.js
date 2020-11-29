@@ -382,7 +382,7 @@ _log(_cfg.cacheTitles[title], 'TITLE')
 		// if(elCSS.styleSheet){
 		// 	elCSS.styleSheet.cssText = _css;
 		// }else{
-		// 	elCSS.appendChild(document.createTextNode(_css));
+			elCSS.appendChild(document.createTextNode(_css));
 		// }
 		document.head.appendChild(elCSS);
 		_displayStats(stats, currentPage, brand);
