@@ -306,6 +306,7 @@ var GCStatsBanner = function(cfg){
 				// }
 
 				var titleFound = false;
+_log(_cfg.cacheTitles, 'TITLES')
 				for(title in _cfg.cacheTitles){
 _log(_cfg.cacheTitles[title], 'TITLE')
 					var matcher = new RegExp(_cfg.cacheTitles[title], "i");
