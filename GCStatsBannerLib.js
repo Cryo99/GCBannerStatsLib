@@ -328,7 +328,7 @@ _log(_cfg.cacheTitles[title], 'TITLE')
 
 		// We're going to display so we can announce ourselves and prepare the configuration dialogue.
 		console.info("GCStatsBannerLib V" + GM_info.script.version);
-		console.info(_seriesName + " Stats V" + _cfg.callerVersion);
+		console.info(_cfg.seriesName + " Stats V" + _cfg.callerVersion);
 
 		//CONFIG
 		_createConfigDlg();
