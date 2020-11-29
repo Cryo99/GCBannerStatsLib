@@ -37,11 +37,7 @@ var GCStatsBanner = function(cfg){
 		// Internal vars.
 		_cacheName = document.getElementById("ctl00_ContentBody_CacheName"),
 		// Images can be wider when level names are long. overflow: hidden; on <series>-container prevents images from overlaying the div border.
-		_css = 'div.' + _cfg.elPrefix + '-container { border: 1px solid #b0b0b0; margin-top: 1.5em; padding: 0; text-align: center; overflow: hidden;} ' + 
-			'.WidgetBody div.' + _cfg.elPrefix + '-container { border: none; } ' +
-			'#ctl00_ContentBody_ProfilePanel1_pnlProfile div.' + _cfg.elPrefix + '-container { border: none; text-align: inherit;} ' +
-			'a.' + _cfg.elPrefix + '-badge { background-color: white;} ' +
-			'#ctl00_ContentBody_ProfilePanel1_pnlProfile div.' + _cfg.elPrefix + '-container {float: left}',
+		_css,
 		_profileNameOld = document.getElementById("ctl00_ContentBody_ProfilePanel1_lblMemberName"),
 		_profileName = document.getElementById("ctl00_ProfileHead_ProfileHeader_lblMemberName"),
 		_userField = document.getElementsByClassName("user-name");
@@ -70,6 +66,8 @@ var GCStatsBanner = function(cfg){
 		}
 		_log(cfg, 'Passed config')
 		_log(_cfg, 'Generated config')
+
+		_generateCSS();
 	}
 	// Run the constructor on creation.
 	_const()
@@ -77,6 +75,14 @@ var GCStatsBanner = function(cfg){
 	function _getPrefix(name){
 		var matches = name.match(/\b(\w)/g);
 		return matches.join('').toLowerCase().padStart(3, '_');
+	}
+
+	function _generateCSS(){
+		_css = 'div.' + _cfg.elPrefix + '-container { border: 1px solid #b0b0b0; margin-top: 1.5em; padding: 0; text-align: center; overflow: hidden;} ' + 
+			'.WidgetBody div.' + _cfg.elPrefix + '-container { border: none; } ' +
+			'#ctl00_ContentBody_ProfilePanel1_pnlProfile div.' + _cfg.elPrefix + '-container { border: none; text-align: inherit;} ' +
+			'a.' + _cfg.elPrefix + '-badge { background-color: white;} ' +
+			'#ctl00_ContentBody_ProfilePanel1_pnlProfile div.' + _cfg.elPrefix + '-container {float: left}',
 	}
 
 	function _log(msg, desc){
