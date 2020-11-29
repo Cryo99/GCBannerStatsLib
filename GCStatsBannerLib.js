@@ -71,7 +71,7 @@ _log(_cfg.elPrefix, 'Prefix');
 		_generateCSS();
 	}
 	// Run the constructor on creation.
-	_const()
+	_const();
 
 	function _getPrefix(name){
 		var matches = name.match(/\b(\w)/g);
@@ -79,6 +79,7 @@ _log(_cfg.elPrefix, 'Prefix');
 	}
 
 	function _generateCSS(){
+		console.log("GENERATING CSS...");
 		_css = 'div.' + _cfg.elPrefix + '-container { border: 1px solid #b0b0b0; margin-top: 1.5em; padding: 0; text-align: center; overflow: hidden;} ' + 
 			'.WidgetBody div.' + _cfg.elPrefix + '-container { border: none; } ' +
 			'#ctl00_ContentBody_ProfilePanel1_pnlProfile div.' + _cfg.elPrefix + '-container { border: none; text-align: inherit;} ' +
