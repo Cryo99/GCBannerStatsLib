@@ -2,7 +2,7 @@
 // @exclude     *
 // @supportURL	https://github.com/Cryo99/GCStatsBannerLib
 // @require     https://openuserjs.org/src/libs/sizzle/GM_config.js
-// @version     0.0.3
+// @version     0.0.4
 // @include     /^https?://www\.geocaching\.com/(account|my|default|geocache|profile|seek/cache_details|p)/
 // @exclude     /^https?://www\.geocaching\.com/(login|about|articles|myfriends|account/*)/
 
