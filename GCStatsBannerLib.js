@@ -66,7 +66,6 @@ var GCStatsBanner = function(cfg){
 		}
 		_log(cfg, 'Passed config');
 		_log(_cfg, 'Generated config');
-_log(_cfg.elPrefix, 'Prefix');
 
 		_generateCSS();
 	}
@@ -79,7 +78,6 @@ _log(_cfg.elPrefix, 'Prefix');
 	}
 
 	function _generateCSS(){
-		console.log("GENERATING CSS...");
 		_css = 'div.' + _cfg.elPrefix + '-container { border: 1px solid #b0b0b0; margin-top: 1.5em; padding: 0; text-align: center; overflow: hidden;} ' + 
 			'.WidgetBody div.' + _cfg.elPrefix + '-container { border: none; } ' +
 			'#ctl00_ContentBody_ProfilePanel1_pnlProfile div.' + _cfg.elPrefix + '-container { border: none; text-align: inherit;} ' +
@@ -157,15 +155,15 @@ _log(_cfg.elPrefix, 'Prefix');
 					divStats.id = "StatsWidget";
 					divStats.innerHTML = '<div class="panel collapsible">\
 	<div class="panel-header isActive" aria-expanded="true">\
-        <h1 id="stats-widget-label" class="h5 no-margin">Statistics</h1>\
-        <button aria-controls="StatsWidget" aria-labelledby="stats-widget-label">\
-            <svg height="22" width="22" class="opener" role="img">\
-                <use xlink:href="/account/app/ui-icons/sprites/global.svg#icon-expand-svg-fill"></use>\
-            </svg>\
-        </button>\
-    </div>\
-    <div class="panel-body" id="StatsComponents"><div class="widget-panel">\
-		</div>\
+		<h1 id="stats-widget-label" class="h5 no-margin">Statistics</h1>\
+		<button aria-controls="StatsWidget" aria-labelledby="stats-widget-label">\
+			<svg height="22" width="22" class="opener" role="img">\
+				<use xlink:href="/account/app/ui-icons/sprites/global.svg#icon-expand-svg-fill"></use>\
+			</svg>\
+		</button>\
+	</div>\
+	<div id="StatsComponents" class="panel-body">\
+		<div id="StatsPanel" class="widget-panel"></div>\
 	</div>\
 </div>';
 
@@ -182,7 +180,7 @@ _log(_cfg.elPrefix, 'Prefix');
 						}
 					});
 				}
-                target = document.getElementById('StatsComponents');
+                target = document.getElementById('WidgetPanel');
 
                 // target = document.getElementsByClassName('sidebar-right')[0];
 				break;
@@ -380,7 +378,6 @@ _log(_cfg.cacheTitles[title], 'TITLE')
 
 		
 		// Inject widget styling
-		// elCSS.type = 'text/css';
 		elCSS.setAttribute('type', 'text/css');
 		if(elCSS.styleSheet){
 			elCSS.styleSheet.cssText = _css;
