@@ -212,9 +212,12 @@ var GCStatsBanner = function(cfg){
                 case "profile":
                     target.parentNode.insertBefore(widget, target.nextSibling);
                     break;
-                default:
-                    target.insertBefore(widget, target.firstChild.nextSibling.nextSibling);
-                    break;
+				case "account":
+					target.appendChild(widget);
+					break;
+				default:
+					target.insertBefore(widget, target.firstChild.nextSibling.nextSibling);
+					break;
             }
         }else{
 			console.warn(_cfg.seriesName + " Stats: didn't generate an award badge.");
