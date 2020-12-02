@@ -64,6 +64,7 @@ var GCStatsBanner = function(cfg){
 		if(!_cfg.elPrefix){
 			_cfg.elPrefix = _getPrefix(cfg.seriesName);
 		}
+		_log(GM_info.script.version, 'Version');
 		_log(cfg, 'Passed config');
 		_log(_cfg, 'Generated config');
 
