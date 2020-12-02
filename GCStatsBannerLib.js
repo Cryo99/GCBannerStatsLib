@@ -5,6 +5,8 @@
 // @version     0.0.5
 // @include     /^https?://www\.geocaching\.com/(account|my|default|geocache|profile|seek/cache_details|p)/
 // @exclude     /^https?://www\.geocaching\.com/(login|about|articles|myfriends|account/*)/
+// @grant       GM_Config
+
 
 // ==UserLibrary==
 // @name        GC Stats Banner Library
