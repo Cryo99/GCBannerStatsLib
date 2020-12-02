@@ -1,6 +1,7 @@
 // ==UserScript==
 // @exclude     *
 // @supportURL	https://github.com/Cryo99/GCStatsBannerLib
+// @version     0.0.6
 // @require     https://openuserjs.org/src/libs/sizzle/GM_config.js
 // @include     /^https?://www\.geocaching\.com/(account|my|default|geocache|profile|seek/cache_details|p)/
 // @exclude     /^https?://www\.geocaching\.com/(login|about|articles|myfriends|account/*)/
@@ -10,7 +11,7 @@
 // @description This library provides the core functionality to add a stats banner onto profile and cache pages on geocaching.com.
 // @copyright   2019-2020, Cryo99 (https://github.com/Cryo99)
 // @license     GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
-// @version     0.0.6
+// @libraryVersion     0.0.6
 
 // ==/UserScript==
 
@@ -64,7 +65,7 @@ var GCStatsBanner = function(cfg){
 		if(!_cfg.elPrefix){
 			_cfg.elPrefix = _getPrefix(cfg.seriesName);
 		}
-		_log(GM_info.script.version, 'Version');
+		_log(GM_info, 'Version');
 		_log(cfg, 'Passed config');
 		_log(_cfg, 'Generated config');
 
