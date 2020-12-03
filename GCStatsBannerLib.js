@@ -261,7 +261,7 @@ var GCStatsBanner = function(cfg){
 			'id': _cfg.elPrefix + '_config', 				// The id used for this instance of GM_config
 			'title': _cfg.seriesName + ' Stats',			// Panel Title
 			'fields': { 									// Fields object
-				elName: { 									// This is the id of the field
+				"'" + elName + "'": { 									// This is the id of the field
 					'label': 'Branding', 					// Appears next to field
 					'type': 'select', 						// Makes this setting a dropdown
 					'options': _cfg.seriesLevels,			// Possible choices
