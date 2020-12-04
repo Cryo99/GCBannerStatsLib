@@ -1,7 +1,7 @@
 // ==UserScript==
 // @exclude     *
 // @supportURL	https://github.com/Cryo99/GCStatsBannerLib
-// @version     0.0.9
+// @version     0.0.10
 // @include     /^https?://www\.geocaching\.com/(account/dashboard|my|default|geocache|profile|seek/cache_details|p)/
 // @exclude     /^https?://www\.geocaching\.com/(login|about|articles|myfriends)/
 // @require     https://openuserjs.org/src/libs/sizzle/GM_config.js
@@ -214,6 +214,14 @@ var GCStatsBanner = function(cfg){
                     target.parentNode.insertBefore(widget, target.nextSibling);
                     break;
 				case "account":
+					// Wait for the stats widget to appear.
+					while(true){
+						if(document.getElementById("StatsWidget")){
+							target.appendChild(widget);
+							break;
+						}
+					}
+
 					// Make the banners wait 1 sec in case the container is drawing.
 					setTimeout((target, widget) => { target.appendChild(widget); }, 1000);
 					break;
