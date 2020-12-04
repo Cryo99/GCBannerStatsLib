@@ -1,7 +1,7 @@
 // ==UserScript==
 // @exclude     *
 // @supportURL	https://github.com/Cryo99/GCStatsBannerLib
-// @version     0.0.8
+// @version     0.0.9
 // @include     /^https?://www\.geocaching\.com/(account/dashboard|my|default|geocache|profile|seek/cache_details|p)/
 // @exclude     /^https?://www\.geocaching\.com/(login|about|articles|myfriends)/
 // @require     https://openuserjs.org/src/libs/sizzle/GM_config.js
@@ -142,8 +142,6 @@ var GCStatsBanner = function(cfg){
 		}
 		_log(html, 'Banner HTML');
 
-		// The timeout which will delay banners on the account page briefly while the container is created.
-		var timeout = 0;
 		switch(page){
 			case "my":
 				target = document.getElementById("ctl00_ContentBody_lnkProfile");
@@ -154,8 +152,6 @@ var GCStatsBanner = function(cfg){
 				var el = document.getElementById("StatsWidget");
 
 				if(!el){
-					// Make the banners wait 1 sec.
-					timeout = 2000;
 					var divStats = document.createElement('div');
 					divStats.id = "StatsWidget";
 					divStats.innerHTML = '<div class="panel collapsible">\
@@ -218,7 +214,8 @@ var GCStatsBanner = function(cfg){
                     target.parentNode.insertBefore(widget, target.nextSibling);
                     break;
 				case "account":
-					setTimeout((target, widget) => { target.appendChild(widget); }, timeout);
+					// Make the banners wait 1 sec in case the container is drawing.
+					setTimeout((target, widget) => { target.appendChild(widget); }, 1000);
 					break;
 				default:
 					target.insertBefore(widget, target.firstChild.nextSibling.nextSibling);
