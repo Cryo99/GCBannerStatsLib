@@ -1,7 +1,7 @@
 // ==UserScript==
 // @exclude     *
 // @supportURL	https://github.com/Cryo99/GCStatsBannerLib
-// @version     0.0.15
+// @version     0.0.16
 // @include     /^https?://www\.geocaching\.com/(account/dashboard|my|default|geocache|profile|seek/cache_details|p)/
 // @exclude     /^https?://www\.geocaching\.com/(login|about|articles|myfriends)/
 // @require     https://openuserjs.org/src/libs/sizzle/GM_config.js
@@ -200,12 +200,12 @@ var GCStatsBanner = function(cfg){
 								GM_setValue('statsWidget_visible', true);
 							}
 						});
+						target = document.getElementById('StatsPanel');
 					};
 					  
 
 
 				}
-                target = document.getElementById('StatsPanel');
 
                 // target = document.getElementsByClassName('sidebar-right')[0];
 				break;
