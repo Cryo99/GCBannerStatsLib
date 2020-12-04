@@ -189,7 +189,9 @@ _log(elWP, "TEST");
 						return new Promise(true);
 					}
 					async function f(divStats){
+						_log({}, "B4");
 						await insertWidget(divStats);
+						_log({}, "AFT");
 						document.querySelector('#StatsWidget .panel-header').addEventListener('click', function() {
 							if (GM_getValue('statsWidget_visible', true)) {
 								document.querySelector('#StatsWidget .panel-header').classList.remove('isActive');
