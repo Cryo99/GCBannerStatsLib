@@ -1,7 +1,7 @@
 // ==UserScript==
 // @exclude     *
 // @supportURL	https://github.com/Cryo99/GCStatsBannerLib
-// @version     0.0.13
+// @version     0.0.14
 // @include     /^https?://www\.geocaching\.com/(account/dashboard|my|default|geocache|profile|seek/cache_details|p)/
 // @exclude     /^https?://www\.geocaching\.com/(login|about|articles|myfriends)/
 // @require     https://openuserjs.org/src/libs/sizzle/GM_config.js
@@ -185,6 +185,19 @@ var GCStatsBanner = function(cfg){
 								break;
 							}
 						}
+
+						document.querySelector('#StatsWidget .panel-header').addEventListener('click', function() {
+							if (GM_getValue('statsWidget_visible', true)) {
+								document.querySelector('#StatsWidget .panel-header').classList.remove('isActive');
+								_fadeOut(document.querySelector('#StatsWidget .panel-body'));
+								GM_setValue('statsWidget_visible', false);
+							}else{
+								document.querySelector('#StatsWidget .panel-header').classList.add('isActive');
+								_fadeIn(document.querySelector('#StatsWidget .panel-body'));
+								GM_setValue('statsWidget_visible', true);
+							}
+						});
+
 						return new Promise(true);
 					}
 					async function f(divStats){
@@ -192,18 +205,6 @@ var GCStatsBanner = function(cfg){
 					};
 					  
 
-
-					document.querySelector('#StatsWidget .panel-header').addEventListener('click', function() {
-						if (GM_getValue('statsWidget_visible', true)) {
-							document.querySelector('#StatsWidget .panel-header').classList.remove('isActive');
-							_fadeOut(document.querySelector('#StatsWidget .panel-body'));
-							GM_setValue('statsWidget_visible', false);
-						}else{
-							document.querySelector('#StatsWidget .panel-header').classList.add('isActive');
-							_fadeIn(document.querySelector('#StatsWidget .panel-body'));
-							GM_setValue('statsWidget_visible', true);
-						}
-					});
 				}
                 target = document.getElementById('StatsPanel');
 
