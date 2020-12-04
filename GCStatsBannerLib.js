@@ -170,15 +170,26 @@ var GCStatsBanner = function(cfg){
 
 					// document.getElementById('WidgetPanel').firstChild.appendChild(divStats);
 					// Wait for the widget panel's internal div to appear.
-					(async (divStats) => {
-						while(true){
+					// while(true){
+					// 	var elWP = document.getElementById("WidgetPanel").firstChild;
+					// 	if(elWP){
+					// 		elWP.appendChild(divStats);
+					// 		break;
+					// 	}
+					// }
+					function insertWidget(e) {
+						while (true) {
 							var elWP = document.getElementById("WidgetPanel").firstChild;
-							if(elWP){
-								elWP.appendChild(divStats);
+							if (elWP) {
+								elWP.appendChild(e);
 								break;
 							}
 						}
-					})();
+						return new Promise(true);
+					}
+					async function f(divStats){
+						await insertWidget(divStats);
+					};
 					  
 
 
