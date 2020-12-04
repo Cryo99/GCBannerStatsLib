@@ -25,8 +25,6 @@ Sites also exist for:
 
 Both the new and old page styles are supported.
 
-[Village Hall Series](https://villagehallseries.wixsite.com/geocaching)
-
 ## The Future
 I would love to see more series able to take advantage of this. There are quite a few candidate series but work will be
 required in order to create the service which provides the data and images, whatever method is used.
