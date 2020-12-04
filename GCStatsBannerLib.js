@@ -1,7 +1,7 @@
 // ==UserScript==
 // @exclude     *
 // @supportURL	https://github.com/Cryo99/GCStatsBannerLib
-// @version     0.0.10
+// @version     0.0.11
 // @include     /^https?://www\.geocaching\.com/(account/dashboard|my|default|geocache|profile|seek/cache_details|p)/
 // @exclude     /^https?://www\.geocaching\.com/(login|about|articles|myfriends)/
 // @require     https://openuserjs.org/src/libs/sizzle/GM_config.js
@@ -168,7 +168,18 @@ var GCStatsBanner = function(cfg){
 	</div>\
 </div>';
 
-					document.getElementById('WidgetPanel').firstChild.appendChild(divStats);
+					// document.getElementById('WidgetPanel').firstChild.appendChild(divStats);
+					// Wait for the widget panel to appear.
+					while(true){
+						var elWP = document.getElementById("WidgetPanel");
+						if(elWP){
+							elWP.firstChild.appendChild(divStats);
+							break;
+						}
+					}
+
+
+
 					document.querySelector('#StatsWidget .panel-header').addEventListener('click', function() {
 						if (GM_getValue('statsWidget_visible', true)) {
 							document.querySelector('#StatsWidget .panel-header').classList.remove('isActive');
@@ -216,7 +227,7 @@ var GCStatsBanner = function(cfg){
 				case "account":
 					// Wait for the stats widget to appear.
 					while(true){
-						if(document.getElementById("StatsWidget")){
+						if(document.getElementById("StatsPanel")){
 							target.appendChild(widget);
 							break;
 						}
