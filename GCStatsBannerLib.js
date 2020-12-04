@@ -2,9 +2,7 @@
 // @exclude     *
 // @supportURL	https://github.com/Cryo99/GCStatsBannerLib
 // @require     https://openuserjs.org/src/libs/sizzle/GM_config.js
-// @version     0.0.5
-// @include     /^https?://www\.geocaching\.com/(account|my|default|geocache|profile|seek/cache_details|p)/
-// @exclude     /^https?://www\.geocaching\.com/(login|about|articles|myfriends|account/*)/
+// @version     0.0.7
 
 // ==UserLibrary==
 // @name        GC Stats Banner Library
@@ -141,6 +139,8 @@ var GCStatsBanner = function(cfg){
 		}
 		_log(html, 'Banner HTML');
 
+		// The timeout which will delay banners on the account page briefly while the container is created.
+		var timeout = 0;
 		switch(page){
 			case "my":
 				target = document.getElementById("ctl00_ContentBody_lnkProfile");
@@ -151,6 +151,8 @@ var GCStatsBanner = function(cfg){
 				var el = document.getElementById("StatsWidget");
 
 				if(!el){
+					// Make the banners wait 1 sec.
+					timeout = 1000;
 					var divStats = document.createElement('div');
 					divStats.id = "StatsWidget";
 					divStats.innerHTML = '<div class="panel collapsible">\
@@ -213,7 +215,7 @@ var GCStatsBanner = function(cfg){
                     target.parentNode.insertBefore(widget, target.nextSibling);
                     break;
 				case "account":
-					target.appendChild(widget);
+					setTimeout((target, widget) => { target.appendChild(widget); }, timeout);
 					break;
 				default:
 					target.insertBefore(widget, target.firstChild.nextSibling.nextSibling);
@@ -254,12 +256,11 @@ var GCStatsBanner = function(cfg){
 			GM_config.open();
 		});
 
-		var elName = _cfg.elPrefix + '_branding';
 		GM_config.init({
 			'id': _cfg.elPrefix + '_config', 				// The id used for this instance of GM_config
 			'title': _cfg.seriesName + ' Stats',			// Panel Title
 			'fields': { 									// Fields object
-				elName: { 									// This is the id of the field
+				'branding': {								// This is the id of the field
 					'label': 'Branding', 					// Appears next to field
 					'type': 'select', 						// Makes this setting a dropdown
 					'options': _cfg.seriesLevels,			// Possible choices
@@ -315,9 +316,7 @@ var GCStatsBanner = function(cfg){
 				// }
 
 				var titleFound = false;
-_log(_cfg.cacheTitles, 'TITLES')
 				for(title in _cfg.cacheTitles){
-_log(_cfg.cacheTitles[title], 'TITLE')
 					var matcher = new RegExp(_cfg.cacheTitles[title], "i");
 					if(matcher.test(_cacheName.innerHTML)){
 						titleFound = true;
@@ -336,7 +335,6 @@ _log(_cfg.cacheTitles[title], 'TITLE')
 		_log(currentPage, 'Detected page');
 
 		// We're going to display so we can announce ourselves and prepare the configuration dialogue.
-		console.info("GCStatsBannerLib V" + GM_info.script.version);
 		console.info(_cfg.seriesName + " Stats V" + _cfg.callerVersion);
 
 		//CONFIG
