@@ -1,7 +1,7 @@
 // ==UserScript==
 // @exclude     *
 // @supportURL	https://github.com/Cryo99/GCStatsBannerLib
-// @version     0.0.12
+// @version     0.0.13
 // @include     /^https?://www\.geocaching\.com/(account/dashboard|my|default|geocache|profile|seek/cache_details|p)/
 // @exclude     /^https?://www\.geocaching\.com/(login|about|articles|myfriends)/
 // @require     https://openuserjs.org/src/libs/sizzle/GM_config.js
@@ -170,14 +170,16 @@ var GCStatsBanner = function(cfg){
 
 					// document.getElementById('WidgetPanel').firstChild.appendChild(divStats);
 					// Wait for the widget panel's internal div to appear.
-					while(true){
-						var elWP = document.getElementById("WidgetPanel").firstChild;
-						if(elWP){
-							elWP.appendChild(divStats);
-							break;
+					(async (divStats) => {
+						while(true){
+							var elWP = document.getElementById("WidgetPanel").firstChild;
+							if(elWP){
+								elWP.appendChild(divStats);
+								break;
+							}
 						}
-					}
-
+					})();
+					  
 
 
 					document.querySelector('#StatsWidget .panel-header').addEventListener('click', function() {
