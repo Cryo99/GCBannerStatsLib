@@ -180,6 +180,7 @@ var GCStatsBanner = function(cfg){
 					function insertWidget(e) {
 						while (true) {
 							var elWP = document.getElementById("WidgetPanel").firstChild;
+_log(elWP, "TEST"
 							if (elWP) {
 								elWP.appendChild(e);
 								break;
