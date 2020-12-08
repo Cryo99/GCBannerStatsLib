@@ -171,7 +171,7 @@ _log(GM_getValue('ZZZZ'), "TEST");
 </div>';
 
 					document.getElementById('WidgetPanel').firstChild.appendChild(divStats);
-					Wait for the widget panel's internal div to appear.
+					// Wait for the widget panel's internal div to appear.
 					while(true){
 						var elWP = document.getElementById("WidgetPanel").firstChild;
 						if(elWP){
