@@ -1,7 +1,7 @@
 // ==UserScript==
 // @exclude     *
 // @supportURL	https://github.com/Cryo99/GCStatsBannerLib
-// @version     0.0.18
+// @version     0.0.19
 // @include     /^https?://www\.geocaching\.com/(account/dashboard|my|default|geocache|profile|seek/cache_details|p)/
 // @exclude     /^https?://www\.geocaching\.com/(login|about|articles|myfriends)/
 // @require     https://openuserjs.org/src/libs/sizzle/GM_config.js
@@ -153,7 +153,7 @@ _log(GM_getValue('ZZZZ'), "TEST");
 				var el = document.getElementById("StatsWidget");
 
 				if(!el){
-					GM_setValue('ZZZZ', true);
+					GM_setValue('ZZZZ', false);
 					var divStats = document.createElement('div');
 					divStats.id = "StatsWidget";
 					divStats.innerHTML = '<div class="panel collapsible">\
@@ -170,12 +170,13 @@ _log(GM_getValue('ZZZZ'), "TEST");
 	</div>\
 </div>';
 
-					document.getElementById('WidgetPanel').firstChild.appendChild(divStats);
+					// document.getElementById('WidgetPanel').firstChild.appendChild(divStats);
 					// Wait for the widget panel's internal div to appear.
 					while(true){
 						var elWP = document.getElementById("WidgetPanel").firstChild;
 						if(elWP){
 							elWP.appendChild(divStats);
+							GM_setValue('ZZZZ', true);
 							break;
 						}
 					}
