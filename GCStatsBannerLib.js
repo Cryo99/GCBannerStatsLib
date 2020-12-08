@@ -148,10 +148,12 @@ var GCStatsBanner = function(cfg){
 				break;
 			case "account":
 				// New account dashboard.
+_log(GM_getValue('ZZZZ'), "TEST");
 				// Insert	 the stats widget if it doesn't exist.
 				var el = document.getElementById("StatsWidget");
 
 				if(!el){
+					GM_setValue('ZZZZ', true);
 					var divStats = document.createElement('div');
 					divStats.id = "StatsWidget";
 					divStats.innerHTML = '<div class="panel collapsible">\
@@ -168,43 +170,43 @@ var GCStatsBanner = function(cfg){
 	</div>\
 </div>';
 
-					// document.getElementById('WidgetPanel').firstChild.appendChild(divStats);
-					// Wait for the widget panel's internal div to appear.
-					// while(true){
-					// 	var elWP = document.getElementById("WidgetPanel").firstChild;
-					// 	if(elWP){
-					// 		elWP.appendChild(divStats);
-					// 		break;
-					// 	}
-					// }
-					function insertWidget(e) {
-						while (true) {
-							var elWP = document.getElementById("WidgetPanel").firstChild;
-_log(elWP, "TEST");
-							if (elWP) {
-								elWP.appendChild(e);
-								break;
-							}
+					document.getElementById('WidgetPanel').firstChild.appendChild(divStats);
+					Wait for the widget panel's internal div to appear.
+					while(true){
+						var elWP = document.getElementById("WidgetPanel").firstChild;
+						if(elWP){
+							elWP.appendChild(divStats);
+							break;
 						}
-						return new Promise(true);
 					}
-					async function f(divStats){
-						_log({}, "B4");
-						await insertWidget(divStats);
-						_log({}, "AFT");
-						document.querySelector('#StatsWidget .panel-header').addEventListener('click', function() {
-							if (GM_getValue('statsWidget_visible', true)) {
-								document.querySelector('#StatsWidget .panel-header').classList.remove('isActive');
-								_fadeOut(document.querySelector('#StatsWidget .panel-body'));
-								GM_setValue('statsWidget_visible', false);
-							}else{
-								document.querySelector('#StatsWidget .panel-header').classList.add('isActive');
-								_fadeIn(document.querySelector('#StatsWidget .panel-body'));
-								GM_setValue('statsWidget_visible', true);
-							}
-						});
-						target = document.getElementById('StatsPanel');
-					};
+// 					function insertWidget(e) {
+// 						while (true) {
+// 							var elWP = document.getElementById("WidgetPanel").firstChild;
+// _log(elWP, "TEST");
+// 							if (elWP) {
+// 								elWP.appendChild(e);
+// 								break;
+// 							}
+// 						}
+// 						return new Promise(true);
+// 					}
+// 					async function f(divStats){
+// 						_log({}, "B4");
+// 						await insertWidget(divStats);
+// 						_log({}, "AFT");
+// 						document.querySelector('#StatsWidget .panel-header').addEventListener('click', function() {
+// 							if (GM_getValue('statsWidget_visible', true)) {
+// 								document.querySelector('#StatsWidget .panel-header').classList.remove('isActive');
+// 								_fadeOut(document.querySelector('#StatsWidget .panel-body'));
+// 								GM_setValue('statsWidget_visible', false);
+// 							}else{
+// 								document.querySelector('#StatsWidget .panel-header').classList.add('isActive');
+// 								_fadeIn(document.querySelector('#StatsWidget .panel-body'));
+// 								GM_setValue('statsWidget_visible', true);
+// 							}
+// 						});
+// 						target = document.getElementById('StatsPanel');
+// 					};
 					  
 
 
