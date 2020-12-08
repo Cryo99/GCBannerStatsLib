@@ -150,8 +150,21 @@ var GCStatsBanner = function(cfg){
 				// New account dashboard.
 _log(GM_getValue('ZZZZ'), "TEST");
 				// Insert	 the stats widget if it doesn't exist.
-				var el = document.getElementById("StatsWidget");
 
+				if(typeof(GM_getValue('ZZZZ')) === 'undefined'){
+					_log(GM_getValue('ZZZZ'), "TEST-UNDEF");
+					GM_setValue('ZZZZ', false);
+				}else if(!GM_getValue('ZZZZ')){
+					_log(GM_getValue('ZZZZ'), "TEST-WAIT");
+					while(!GM_getValue('ZZZZ')){
+						if(GM_getValue('ZZZZ')){
+							break;
+						}
+					}
+				}else{
+					_log(GM_getValue('ZZZZ'), "TEST-DRAW");
+
+				var el = document.getElementById("StatsWidget");
 				if(!el){
 					GM_setValue('ZZZZ', false);
 					var divStats = document.createElement('div');
@@ -212,6 +225,7 @@ _log(GM_getValue('ZZZZ'), "TEST");
 
 
 				}
+			}
 
                 // target = document.getElementsByClassName('sidebar-right')[0];
 				break;
