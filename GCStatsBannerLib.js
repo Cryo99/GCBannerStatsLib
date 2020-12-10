@@ -186,7 +186,7 @@ var GCStatsBanner = function(cfg){
 								break;
 							}
 						}
-						return new Promise(true);
+						return new Promise((resolve) => setTimeout(() => resolve('2')));
 					};
 
 					async function wait(target, widget){
