@@ -179,15 +179,17 @@ var GCStatsBanner = function(cfg){
                     target.parentNode.insertBefore(widget, target.nextSibling);
                     break;
 				case "account":
-					function waitForDiv(target, widget) {
-						while(true){
-							if(target.firstChild){
-								target.firstChild.appendChild(widget);
-								break;
+					function waitForDiv(target) {
+						return new Promise(resolve => {
+							while(true){
+								if(target.firstChild){
+									break;
+								}
 							}
-						}
-						return new Promise((resolve) => setTimeout(() => resolve('2')));
+							resolve('resolved');
+						});
 					};
+
 
 					// async function wait(target, widget){
 					// 	await waitForDiv(target, widget);
@@ -196,7 +198,8 @@ var GCStatsBanner = function(cfg){
 
 
 					(async (target, widget) => {
-						await waitForDiv(target, widget);
+						await waitForDiv(target);
+						target.firstChild.appendChild(widget);
 					})();
 
 					break;
