@@ -1,7 +1,7 @@
 // ==UserScript==
 // @exclude     *
 // @supportURL	https://github.com/Cryo99/GCStatsBannerLib
-// @version     0.0.19
+// @version     0.0.20
 // @include     /^https?://www\.geocaching\.com/(account/dashboard|my|default|geocache|profile|seek/cache_details|p)/
 // @exclude     /^https?://www\.geocaching\.com/(login|about|articles|myfriends)/
 // @require     https://openuserjs.org/src/libs/sizzle/GM_config.js
@@ -148,86 +148,7 @@ var GCStatsBanner = function(cfg){
 				break;
 			case "account":
 				// New account dashboard.
-_log(GM_getValue('ZZZZ'), "TEST");
-				// Insert	 the stats widget if it doesn't exist.
-
-				if(typeof(GM_getValue('ZZZZ')) === 'undefined'){
-					_log(GM_getValue('ZZZZ'), "TEST-UNDEF");
-					GM_setValue('ZZZZ', false);
-				}else if(!GM_getValue('ZZZZ')){
-					_log(GM_getValue('ZZZZ'), "TEST-WAIT");
-					while(!GM_getValue('ZZZZ')){
-						if(GM_getValue('ZZZZ')){
-							break;
-						}
-					}
-				}else{
-					_log(GM_getValue('ZZZZ'), "TEST-DRAW");
-
-				var el = document.getElementById("StatsWidget");
-				if(!el){
-					GM_setValue('ZZZZ', false);
-					var divStats = document.createElement('div');
-					divStats.id = "StatsWidget";
-					divStats.innerHTML = '<div class="panel collapsible">\
-	<div class="panel-header isActive" aria-expanded="true">\
-		<h1 id="stats-widget-label" class="h5 no-margin">Statistics</h1>\
-		<button aria-controls="StatsWidget" aria-labelledby="stats-widget-label">\
-			<svg height="22" width="22" class="opener" role="img">\
-				<use xlink:href="/account/app/ui-icons/sprites/global.svg#icon-expand-svg-fill"></use>\
-			</svg>\
-		</button>\
-	</div>\
-	<div id="StatsComponents" class="panel-body">\
-		<div id="StatsPanel" class="widget-panel"></div>\
-	</div>\
-</div>';
-
-					// document.getElementById('WidgetPanel').firstChild.appendChild(divStats);
-					// Wait for the widget panel's internal div to appear.
-					while(true){
-						var elWP = document.getElementById("WidgetPanel").firstChild;
-						if(elWP){
-							elWP.appendChild(divStats);
-							GM_setValue('ZZZZ', true);
-							break;
-						}
-					}
-// 					function insertWidget(e) {
-// 						while (true) {
-// 							var elWP = document.getElementById("WidgetPanel").firstChild;
-// _log(elWP, "TEST");
-// 							if (elWP) {
-// 								elWP.appendChild(e);
-// 								break;
-// 							}
-// 						}
-// 						return new Promise(true);
-// 					}
-// 					async function f(divStats){
-// 						_log({}, "B4");
-// 						await insertWidget(divStats);
-// 						_log({}, "AFT");
-// 						document.querySelector('#StatsWidget .panel-header').addEventListener('click', function() {
-// 							if (GM_getValue('statsWidget_visible', true)) {
-// 								document.querySelector('#StatsWidget .panel-header').classList.remove('isActive');
-// 								_fadeOut(document.querySelector('#StatsWidget .panel-body'));
-// 								GM_setValue('statsWidget_visible', false);
-// 							}else{
-// 								document.querySelector('#StatsWidget .panel-header').classList.add('isActive');
-// 								_fadeIn(document.querySelector('#StatsWidget .panel-body'));
-// 								GM_setValue('statsWidget_visible', true);
-// 							}
-// 						});
-// 						target = document.getElementById('StatsPanel');
-// 					};
-					  
-
-
-				}
-			}
-
-                // target = document.getElementsByClassName('sidebar-right')[0];
+				document.getElementById('WidgetPanel').firstChild.appendChild(divStats);
 				break;
 			case "cache":
                 target = document.getElementsByClassName('sidebar')[0];
