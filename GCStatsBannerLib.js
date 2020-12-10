@@ -189,10 +189,16 @@ var GCStatsBanner = function(cfg){
 						return new Promise((resolve) => setTimeout(() => resolve('2')));
 					};
 
-					async function wait(target, widget){
+					// async function wait(target, widget){
+					// 	await waitForDiv(target, widget);
+					// };
+					// wait(target, widget);
+
+
+					(async (target, widget) => {
 						await waitForDiv(target, widget);
-					};
-					wait(target, widget);
+					})();
+
 					break;
 				default:
 					target.insertBefore(widget, target.firstChild.nextSibling.nextSibling);
