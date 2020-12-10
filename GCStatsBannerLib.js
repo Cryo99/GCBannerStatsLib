@@ -1,7 +1,7 @@
 // ==UserScript==
 // @exclude     *
 // @supportURL	https://github.com/Cryo99/GCStatsBannerLib
-// @version     0.0.21
+// @version     0.0.22
 // @include     /^https?://www\.geocaching\.com/(account/dashboard|my|default|geocache|profile|seek/cache_details|p)/
 // @exclude     /^https?://www\.geocaching\.com/(login|about|articles|myfriends)/
 // @require     https://openuserjs.org/src/libs/sizzle/GM_config.js
@@ -148,17 +148,7 @@ var GCStatsBanner = function(cfg){
 				break;
 			case "account":
 				// New account dashboard.
-
-					// document.getElementById('WidgetPanel').firstChild.appendChild(divStats);
-					// Wait for the widget panel's internal div to appear.
-					while(true){
-						var elWP = document.getElementById("WidgetPanel").firstChild;
-						if(elWP){
-							elWP.appendChild(divStats);
-							GM_setValue('ZZZZ', true);
-							break;
-						}
-					}
+				target = document.getElementById("WidgetPanel");
 				break;
 			case "cache":
                 target = document.getElementsByClassName('sidebar')[0];
@@ -189,16 +179,20 @@ var GCStatsBanner = function(cfg){
                     target.parentNode.insertBefore(widget, target.nextSibling);
                     break;
 				case "account":
-					// Wait for the stats widget to appear.
-					while(true){
-						if(document.getElementById("StatsPanel")){
-							target.appendChild(widget);
-							break;
+					function waitForDiv(target, widget) {
+						while(true){
+							if(target.firstChild){
+								target.firstChild.appendChild(widget);
+								break;
+							}
 						}
-					}
+						return new Promise(true);
+					};
 
-					// Make the banners wait 1 sec in case the container is drawing.
-					setTimeout((target, widget) => { target.appendChild(widget); }, 1000);
+					async function wait(target, widget){
+						await waitForDiv(target, widget);
+					};
+					wait(target, widget);
 					break;
 				default:
 					target.insertBefore(widget, target.firstChild.nextSibling.nextSibling);
