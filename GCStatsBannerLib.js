@@ -181,7 +181,9 @@ var GCStatsBanner = function(cfg){
 				case "account":
 					function waitForDiv(target) {
 						return new Promise(resolve => {
+							// Wait for the WidgetPanel's internal div to appear.
 							while(true){
+								// If the div is found, break out and resolve the promise.
 								if(target.firstChild){
 									break;
 								}
@@ -189,19 +191,52 @@ var GCStatsBanner = function(cfg){
 							resolve('resolved');
 						});
 					};
-
-
-					// async function wait(target, widget){
-					// 	await waitForDiv(target, widget);
-					// };
-					// wait(target, widget);
-
-
-					(async (target, widget) => {
+				
+					(async (target) => {
+						_log('B4 AWAIT', 'TEST-2');
+						_log(target, 'TARGET-IN-2');
+						// Wait for notification that the container div is present.
 						await waitForDiv(target);
-						target.firstChild.appendChild(widget);
-					})();
-
+						
+						// If the StatsWidget isn't present, create it.
+						var el = document.getElementById("StatsWidget");
+						if(!el){
+							_log('CREATING', 'DIV-B4');
+							var divStats = document.createElement('div');
+							divStats.id = "StatsWidget";
+							divStats.innerHTML = '<div class="panel collapsible">\
+		<div class="panel-header isActive" aria-expanded="true">\
+		<h1 id="stats-widget-label" class="h5 no-margin">Statistics</h1>\
+		<button aria-controls="StatsWidget" aria-labelledby="stats-widget-label">\
+			<svg height="22" width="22" class="opener" role="img">\
+				<use xlink:href="/account/app/ui-icons/sprites/global.svg#icon-expand-svg-fill"></use>\
+			</svg>\
+		</button>\
+	</div>\
+	<div id="StatsComponents" class="panel-body">\
+		<div id="StatsPanel" class="widget-panel"></div>\
+	</div>\
+</div>';
+							_log(divStats, 'DIV-B4-2');
+				
+							target.firstChild.appendChild(divStats);
+				
+							// Add the click handler.
+							document.querySelector('#StatsWidget .panel-header').addEventListener('click', function() {
+								if (GM_getValue('statsWidget_visible', true)) {
+									document.querySelector('#StatsWidget .panel-header').classList.remove('isActive');
+									_fadeOut(document.querySelector('#StatsWidget .panel-body'));
+									GM_setValue('statsWidget_visible', false);
+								}else{
+									document.querySelector('#StatsWidget .panel-header').classList.add('isActive');
+									_fadeIn(document.querySelector('#StatsWidget .panel-body'));
+									GM_setValue('statsWidget_visible', true);
+								}
+							});
+						}
+						// Finally, append the banner.
+						document.querySelector('#StatsPanel').appendChild(widget);				
+					})(target);
 					break;
 				default:
 					target.insertBefore(widget, target.firstChild.nextSibling.nextSibling);
