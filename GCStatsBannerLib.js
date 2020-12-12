@@ -1,7 +1,7 @@
 // ==UserScript==
 // @exclude     *
 // @supportURL	https://github.com/Cryo99/GCStatsBannerLib
-// @version     0.0.23
+// @version     0.0.24
 // @include     /^https?://www\.geocaching\.com/(account/dashboard|my|default|geocache|profile|seek/cache_details|p)/
 // @exclude     /^https?://www\.geocaching\.com/(login|about|articles|myfriends)/
 // @require     https://openuserjs.org/src/libs/sizzle/GM_config.js
@@ -199,7 +199,7 @@ var GCStatsBanner = function(cfg){
 	<div id="StatsPanel" class="widget-panel"></div>\
 </div>';
 				
-						target.firstChild.appendChild(divStats);
+						target.append(divStats);
 						// Hide the panel if it was previously hidden. 
 						if (!GM_getValue('statsWidget_visible', false)) {
 							document.querySelector('#StatsWidget .panel-body').style.display = "none";
