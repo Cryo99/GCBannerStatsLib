@@ -1,7 +1,7 @@
 // ==UserScript==
 // @exclude     *
 // @supportURL	https://github.com/Cryo99/GCStatsBannerLib
-// @version     0.0.22
+// @version     0.0.23
 // @include     /^https?://www\.geocaching\.com/(account/dashboard|my|default|geocache|profile|seek/cache_details|p)/
 // @exclude     /^https?://www\.geocaching\.com/(login|about|articles|myfriends)/
 // @require     https://openuserjs.org/src/libs/sizzle/GM_config.js
@@ -148,7 +148,8 @@ var GCStatsBanner = function(cfg){
 				break;
 			case "account":
 				// New account dashboard.
-				target = document.getElementById("WidgetPanel");
+				// The WidgetPanel is too slow to load and causes scripts to block so follow GClhII and just append the widget to the sidebar.
+				target = document.querySelector(".sidebar-right");
 				break;
 			case "cache":
                 target = document.getElementsByClassName('sidebar')[0];
@@ -179,64 +180,48 @@ var GCStatsBanner = function(cfg){
                     target.parentNode.insertBefore(widget, target.nextSibling);
                     break;
 				case "account":
-					function waitForDiv(target) {
-						return new Promise(resolve => {
-							// Wait for the WidgetPanel's internal div to appear.
-							while(true){
-								// If the div is found, break out and resolve the promise.
-								if(target.firstChild){
-									break;
-								}
-							}
-							resolve('resolved');
-						});
-					};
-				
-					(async (target) => {
-						_log('B4 AWAIT', 'TEST-2');
-						_log(target, 'TARGET-IN-2');
-						// Wait for notification that the container div is present.
-						await waitForDiv(target);
-						
-						// If the StatsWidget isn't present, create it.
-						var el = document.getElementById("StatsWidget");
-						if(!el){
-							_log('CREATING', 'DIV-B4');
-							var divStats = document.createElement('div');
-							divStats.id = "StatsWidget";
-							divStats.innerHTML = '<div class="panel collapsible">\
-		<div class="panel-header isActive" aria-expanded="true">\
-		<h1 id="stats-widget-label" class="h5 no-margin">Statistics</h1>\
-		<button aria-controls="StatsWidget" aria-labelledby="stats-widget-label">\
-			<svg height="22" width="22" class="opener" role="img">\
-				<use xlink:href="/account/app/ui-icons/sprites/global.svg#icon-expand-svg-fill"></use>\
-			</svg>\
-		</button>\
-	</div>\
-	<div id="StatsComponents" class="panel-body">\
-		<div id="StatsPanel" class="widget-panel"></div>\
-	</div>\
+					// If the StatsWidget isn't present, create it.
+					var el = document.getElementById("StatsWidget");
+					if(!el){
+						_log('Creating widget.', 'StatsWidget');
+						var divStats = document.createElement('div');
+						divStats.id = "StatsWidget";
+						divStats.classList.add("panel", "collapsible");
+						divStats.innerHTML = '<div class="panel-header isActive" aria-expanded="true">\
+	<h1 id="stats-widget-label" class="h5 no-margin">Statistics</h1>\
+	<button aria-controls="StatsWidget" aria-labelledby="stats-widget-label">\
+		<svg height="22" width="22" class="opener" role="img">\
+			<use xlink:href="/account/app/ui-icons/sprites/global.svg#icon-expand-svg-fill"></use>\
+		</svg>\
+	</button>\
+</div>\
+<div id="StatsComponents" class="panel-body">\
+	<div id="StatsPanel" class="widget-panel"></div>\
 </div>';
-							_log(divStats, 'DIV-B4-2');
 				
-							target.firstChild.appendChild(divStats);
-				
-							// Add the click handler.
-							document.querySelector('#StatsWidget .panel-header').addEventListener('click', function() {
-								if (GM_getValue('statsWidget_visible', true)) {
-									document.querySelector('#StatsWidget .panel-header').classList.remove('isActive');
-									_fadeOut(document.querySelector('#StatsWidget .panel-body'));
-									GM_setValue('statsWidget_visible', false);
-								}else{
-									document.querySelector('#StatsWidget .panel-header').classList.add('isActive');
-									_fadeIn(document.querySelector('#StatsWidget .panel-body'));
-									GM_setValue('statsWidget_visible', true);
-								}
-							});
+						target.firstChild.appendChild(divStats);
+						// Hide the panel if it was previously hidden. 
+						if (!GM_getValue('statsWidget_visible', false)) {
+							document.querySelector('#StatsWidget .panel-body').style.display = "none";
+							document.querySelector('#StatsWidget .panel-header').classList.remove('isActive');
+							_fadeOut(document.querySelector('#StatsWidget .panel-body'));
 						}
-						// Finally, append the banner.
-						document.querySelector('#StatsPanel').appendChild(widget);				
-					})(target);
+		
+						// Add the click handler.
+						document.querySelector('#StatsWidget .panel-header').addEventListener('click', function() {
+							if (GM_getValue('statsWidget_visible', true)) {
+								document.querySelector('#StatsWidget .panel-header').classList.remove('isActive');
+								_fadeOut(document.querySelector('#StatsWidget .panel-body'));
+								GM_setValue('statsWidget_visible', false);
+							}else{
+								document.querySelector('#StatsWidget .panel-header').classList.add('isActive');
+								_fadeIn(document.querySelector('#StatsWidget .panel-body'));
+								GM_setValue('statsWidget_visible', true);
+							}
+						});
+					}
+					// Finally, append the banner.
+					document.querySelector('#StatsPanel').appendChild(widget);				
 					break;
 				default:
 					target.insertBefore(widget, target.firstChild.nextSibling.nextSibling);
