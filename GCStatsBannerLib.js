@@ -1,7 +1,7 @@
 // ==UserScript==
 // @exclude     *
 // @supportURL	https://github.com/Cryo99/GCStatsBannerLib
-// @version     1.0.1
+// @version     1.0.2
 // @include     /^https?://www\.geocaching\.com/(account/dashboard|my|default|geocache|profile|seek/cache_details|p)/
 // @exclude     /^https?://www\.geocaching\.com/(login|about|articles|myfriends)/
 // @require     https://openuserjs.org/src/libs/sizzle/GM_config.js
@@ -287,6 +287,7 @@ var GCStatsBanner = function(cfg){
 					frame.style.borderColor = '#999999';
 				},
 				'save': function(){
+					GM_setValue(_cfg.elPrefix + '_branding', GM_config.get('branding'));
 					location.reload();                      // reload the page when configuration was changed
 				}
 			}
