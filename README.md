@@ -37,6 +37,11 @@ level and displaying the graphic.
 
 ## Version History
 
+### Version 1.0.1
+
+* Fixed a bug in the options dialogue.
+* Restored the options dialogue button text colour to black.
+
 ### Version 1.0.0
 
 * Initial release.
